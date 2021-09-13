@@ -4,7 +4,7 @@ import os
 import ssl
 import unittest
 
-endpoint = os.environ.get("API_ENDPOINT")
+endpoint = os.environ.get("API_ENDPOINT", "python-flask-service-shnjd7oeia-uc.a.run.app")
 
 context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
 
