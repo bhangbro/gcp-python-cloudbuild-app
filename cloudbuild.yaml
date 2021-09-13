@@ -7,18 +7,27 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/${_IMAGE_NAME}']
 
-  # Deploy container image to Cloud Run
+  # Deploy container image to Cloud Run Region 1
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args: ['run', 'deploy', '${_SERVICE_NAME}',
            '--image', 'gcr.io/$PROJECT_ID/${_IMAGE_NAME}',
-           '--region', '${_REGION}',
+           '--region', '${_REGION_1}',
+           '--allow-unauthenticated']
+
+  # Deploy container image to Cloud Run Region 2
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args: ['run', 'deploy', '${_SERVICE_NAME}',
+           '--image', 'gcr.io/$PROJECT_ID/${_IMAGE_NAME}',
+           '--region', '${_REGION_2}',
            '--allow-unauthenticated']
 
 substitutions:
   _IMAGE_NAME: python_flask_app_image
   _SERVICE_NAME: python-flask-service
-  _REGION: us-central1
+  _REGION_1: us-east1
+  _REGION_2: us-central1
 
 images:
   - gcr.io/$PROJECT_ID/${_IMAGE_NAME}
