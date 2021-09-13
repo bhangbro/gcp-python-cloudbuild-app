@@ -20,6 +20,7 @@ steps:
       - '${_REGION}'
       - '--allow-unauthenticated'
 
+
 substitutions:
   #  _IMAGE_NAME: python_flask_app_image
   _SERVICE_NAME: python-flask-service
